@@ -1,8 +1,9 @@
-package com.gmail.aspoka1.molekyralphisic;
+package com.gmail.aspoka1.molecularphisic.graphics;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -10,7 +11,7 @@ import javax.swing.JFrame;
 public class DrawFrame extends JFrame {
 	private static final long serialVersionUID = 801486476992470583L;
 
-	private Canvas c;
+	private DrawComponent c;
 	
 	public DrawFrame(int width, int height, String name) {
 		super();
@@ -22,15 +23,21 @@ public class DrawFrame extends JFrame {
 		setVisible(true);
 	}
 	
-	Canvas getCanvas() {
-		return c;
+	public void addDrawableElement (Drawable e) {
+		c.addDravableElement(e);
 	}
+	
+	// getters
+	Canvas getCanvas() { return c; }
+	
 
 }
 
 
 class DrawComponent extends Canvas {
 	private static final long serialVersionUID = 9091637057872804463L;
+	
+	List<Drawable> elements = new ArrayList<>();
 	
 	public DrawComponent(int width, int height) {
 		setSize(width, height);
@@ -40,7 +47,16 @@ class DrawComponent extends Canvas {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		g.setColor(Color.RED);
-		g.fillOval(100, 100, 10, 10);
+		for(Drawable e : elements) {
+			e.paint(g);
+		}
+	}
+	
+	public void addDravableElement(Drawable e) {
+		elements.add(e);
+	}
+	
+	public void clearDrawableElements() {
+		elements.clear();
 	}
 }

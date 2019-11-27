@@ -1,8 +1,12 @@
-package com.gmail.aspoka1.molekyralphisic;
+package com.gmail.aspoka1.molecularphisic.phisic;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 
 /**
  * Basic class of atom
@@ -13,9 +17,11 @@ import java.util.List;
  * @version 1.0
  * @author aspoka
  */
-public class Atom extends Point2D.Double implements Gravitation{
+public class Atom extends Point2D.Double implements Gravitation, Drawable{
 	private static final long serialVersionUID = -367935700757882281L;
 
+	private static final int radius = 2;
+	
 	private Point2D.Double velocity;
 	private Point2D.Double acceleration;
 	private Point2D.Double avergeForce;
@@ -50,8 +56,16 @@ public class Atom extends Point2D.Double implements Gravitation{
 	 * This binder had to have reference to this atom
 	 * @param binder
 	 */
-	protected void addBinder(Binder binder) {
+	public void addBinder(Binder binder) {
 		this.binder.add(binder);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(Color.RED);
+		g.fillOval((int)x - radius, (int)y - radius, 2 * radius, 2 * radius);
+		
+		
 	}
 
 	
@@ -59,4 +73,5 @@ public class Atom extends Point2D.Double implements Gravitation{
 	public Point2D.Double getVelocity() { return velocity; }
 	public Point2D.Double getAvergeForce() { return avergeForce; }
 	public Point2D.Double getAcceleration() { return acceleration; }
+	
 }

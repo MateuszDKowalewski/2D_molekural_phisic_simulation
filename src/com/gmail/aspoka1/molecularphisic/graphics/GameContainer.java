@@ -1,4 +1,4 @@
-package com.gmail.aspoka1.molekyralphisic;
+package com.gmail.aspoka1.molecularphisic.graphics;
 
 import java.awt.Canvas;
 
@@ -49,17 +49,18 @@ public class GameContainer implements Runnable {
 				unprocessedTime -= UPDATE_CUP;
 				render = true;
 				// TODO: update game
+				
+				
 				if(frameTime >= 1.0) {
 					frameTime = 0;
 					fps = frames;
 					frames = 0;
-					System.out.println("FPS: " + fps);
-				}
+					//System.out.println("FPS: " + fps);
+					}
 			}
 			
 			if(render) {
 				frames++;
-				// TODO: render game
 				c.repaint();
 			} else {
 				try {
