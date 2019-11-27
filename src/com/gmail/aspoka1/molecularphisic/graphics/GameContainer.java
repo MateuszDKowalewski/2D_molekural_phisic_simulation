@@ -1,15 +1,13 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
-import java.awt.Canvas;
-
 public class GameContainer implements Runnable {
 	private Thread thread;
-	private Canvas c;
+	private Panel c;
 	
 	private boolean running = false;
 	private final double UPDATE_CUP = 1.0 / 60.0;
 	
-	public GameContainer(Canvas c) {
+	public GameContainer(Panel c) {
 		this.c = c;
 	}
 	

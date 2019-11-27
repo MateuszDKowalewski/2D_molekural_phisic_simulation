@@ -11,7 +11,7 @@ public class Main {
 		DrawFrame frame = new DrawFrame(WIDTH, HEIGHT, NAME);
 		GameContainer gc = new GameContainer(frame.getCanvas());
 		
-		frame.addDrawableElement(new Ball(WIDTH / 2, HEIGHT / 2, 10, 100));
+		frame.addDrawableElement(new Ball(WIDTH / 2, HEIGHT / 2, 60, 200));
 		
 		gc.start();
 	}

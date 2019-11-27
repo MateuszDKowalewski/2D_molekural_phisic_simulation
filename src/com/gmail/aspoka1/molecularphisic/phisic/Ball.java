@@ -3,44 +3,45 @@ package com.gmail.aspoka1.molecularphisic.phisic;
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.util.LinkedList;
-import java.util.List;
 
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 
 public class Ball implements Phisic, Drawable, Gravitation{
 	private Atom preasure;
-	private List<Atom> surface = new LinkedList<>();
-	private List<Binder> binders = new LinkedList<>();
+	private Atom[] surface;
+	private Binder[] binders;
 	
 	public Ball(double x, double y, int atomsAmount, double radius) {
 		preasure = new Atom(x, y);
 		
+		surface = new Atom[atomsAmount];
+		binders = new Binder[2 * atomsAmount];
+		
 		Point2D.Double temp = new Point2D.Double();
 		for(int i = 0; i < atomsAmount; i++) {
 			AffineTransform.getRotateInstance(Math.toRadians(360 / atomsAmount * i), x, y).transform(new Point2D.Double(x, y - radius), temp);
-			surface.add(new Atom(temp));
+			surface[i] = new Atom(temp);
 		}
 		
 		Binder bind;
-		for(Atom t : surface) {
-			bind = new Binder(preasure, t);
-			t.addBinder(bind);
+		for(int i = 0; i < atomsAmount; i++) {
+			bind = new Binder(preasure, surface[i]);
+			surface[i].addBinder(bind);
 			preasure.addBinder(bind);
-			binders.add(bind);
+			binders[i] =bind;
 		}
 		
-		for(int i = 0; i < surface.size() - 1; i++) {
-			bind = new Binder(surface.get(i), surface.get(i + 1));
-			surface.get(i).addBinder(bind);
-			surface.get(i + 1).addBinder(bind);
-			binders.add(bind);
+		for(int i = 0; i < atomsAmount - 1; i++) {
+			bind = new Binder(surface[i], surface[i + 1]);
+			surface[i].addBinder(bind);
+			surface[i + 1].addBinder(bind);
+			binders[i + atomsAmount] = bind;
 		}
 		
-		bind = new Binder(surface.get(0), surface.get(surface.size() - 1));
-		surface.get(0).addBinder(bind);
-		surface.get(surface.size() - 1).addBinder(bind);
-		binders.add(bind);
+		bind = new Binder(surface[0], surface[atomsAmount - 1]);
+		surface[0].addBinder(bind);
+		surface[atomsAmount - 1].addBinder(bind);
+		binders[2 * atomsAmount - 1] = bind;
 	}
 
 	@Override
