@@ -17,7 +17,7 @@ import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
  * @version 1.0
  * @author aspoka
  */
-public class Atom extends Point2D.Double implements Gravitation, Drawable{
+public class Atom extends Point2D.Double implements Gravitation, Drawable, Phisic{
 	private static final long serialVersionUID = -367935700757882281L;
 
 	private static final int radius = 2;
@@ -27,6 +27,10 @@ public class Atom extends Point2D.Double implements Gravitation, Drawable{
 	private Point2D.Double avergeForce;
 	
 	private List<Binder> binder = new LinkedList<>();
+	
+	public Atom(Point2D.Double p) {
+		super(p.x, p.y);
+	}
 	
 	/**
 	 * Create atom without any binders, velocity, acceleration and force
@@ -63,11 +67,16 @@ public class Atom extends Point2D.Double implements Gravitation, Drawable{
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillOval((int)x - radius, (int)y - radius, 2 * radius, 2 * radius);
+		g.fillOval((int)Math.round(x) - radius, (int)Math.round(y) - radius, 2 * radius, 2 * radius);
 		
 		
 	}
 
+	@Override
+	public void calculePhisic(double time) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	// Getters
 	public Point2D.Double getVelocity() { return velocity; }

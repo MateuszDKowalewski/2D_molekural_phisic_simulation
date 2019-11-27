@@ -1,5 +1,7 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
+import com.gmail.aspoka1.molecularphisic.phisic.Ball;
+
 public class Main {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
@@ -9,7 +11,7 @@ public class Main {
 		DrawFrame frame = new DrawFrame(WIDTH, HEIGHT, NAME);
 		GameContainer gc = new GameContainer(frame.getCanvas());
 		
-		
+		frame.addDrawableElement(new Ball(WIDTH / 2, HEIGHT / 2, 10, 100));
 		
 		gc.start();
 	}

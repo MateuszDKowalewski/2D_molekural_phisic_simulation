@@ -33,6 +33,7 @@ public class GameContainer implements Runnable {
 		
 		double frameTime = 0;
 		int frames = 0;
+		@SuppressWarnings("unused")
 		int fps = 0;
 		
 		while(running) {
@@ -55,12 +56,13 @@ public class GameContainer implements Runnable {
 					frameTime = 0;
 					fps = frames;
 					frames = 0;
-					//System.out.println("FPS: " + fps);
+					System.out.println("FPS: " + fps);
 					}
 			}
 			
 			if(render) {
 				frames++;
+				// TODO: render game
 				c.repaint();
 			} else {
 				try {
