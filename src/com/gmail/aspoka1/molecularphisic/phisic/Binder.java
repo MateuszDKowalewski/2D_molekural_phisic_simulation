@@ -2,6 +2,7 @@ package com.gmail.aspoka1.molecularphisic.phisic;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 
@@ -31,6 +32,37 @@ public class Binder implements Drawable{
 		a1.addBinder(this);
 		a2.addBinder(this);
 		this.defaultLenght = defaultLenght;
+	}
+	
+	public Point2D.Double calculeForce(Atom a) {
+		Point2D.Double force;
+		double xForce;
+		double yForce;
+		
+		double lenght = a1.distance(a2);
+		double forceLenght;
+		double x = Math.abs(lenght - defaultLenght);
+		
+		if(lenght < defaultLenght) {
+			forceLenght = -Math.exp(x);
+		} else if(lenght > defaultLenght) {
+			forceLenght = Math.exp(x);
+		} else {
+			forceLenght = 0;
+		}
+		
+		xForce = (a2.x - a1.x) / defaultLenght * forceLenght;
+		yForce = (a2.y - a1.y) / defaultLenght * forceLenght;
+		
+		if(a == a1) {
+			force = new Point2D.Double(xForce, yForce);
+			return force;
+		} else if(a == a2) {
+			force = new Point2D.Double(-xForce, -yForce);
+			return force;
+		}
+		
+		return null;
 	}
 
 	@Override

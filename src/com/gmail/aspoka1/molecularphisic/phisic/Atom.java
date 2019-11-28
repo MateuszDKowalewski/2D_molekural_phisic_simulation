@@ -17,19 +17,24 @@ import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
  * @version 1.0
  * @author aspoka
  */
-public class Atom extends Point2D.Double implements Gravitation, Drawable, Phisic{
+public class Atom extends Point2D.Double implements Drawable, Phisic{
 	private static final long serialVersionUID = -367935700757882281L;
 
+	private boolean simulatePhisic;
+	
+	private Point2D.Double velocity = new Point2D.Double();
+	private Point2D.Double acceleration = new Point2D.Double();
+	private Point2D.Double avergeForce = new Point2D.Double();
+	
 	private static final int radius = 2;
+	private double weight;
 	
-	private Point2D.Double velocity;
-	private Point2D.Double acceleration;
-	private Point2D.Double avergeForce;
+	private List<Binder> binders = new LinkedList<>();
 	
-	private List<Binder> binder = new LinkedList<>();
-	
-	public Atom(Point2D.Double p) {
+	public Atom(Point2D.Double p, double weight) {
 		super(p.x, p.y);
+		this.weight = weight;
+		this.setPhisicSimulation(true);
 	}
 	
 	/**
@@ -37,8 +42,10 @@ public class Atom extends Point2D.Double implements Gravitation, Drawable, Phisi
 	 * @param x position of atom
 	 * @param y position of atom
 	 */
-	public Atom(double x, double y) {
+	public Atom(double x, double y, double weight) {
 		super(x, y);
+		this.weight = weight;
+		this.setPhisicSimulation(true);
 	}
 	
 	/**
@@ -48,11 +55,13 @@ public class Atom extends Point2D.Double implements Gravitation, Drawable, Phisi
 	 * @param y position of atom
 	 * @param binders list of binder attached to this point
 	 */
-	public Atom(double x, double y, Binder ... binders) {
+	public Atom(double x, double y, double weight, Binder ... binders) {
 		super(x, y);
+		this.weight = weight;
 		for(Binder t : binders) {
-			this.binder.add(t);
+			this.binders.add(t);
 		}
+		this.setPhisicSimulation(true);
 	}
 	
 	/**
@@ -61,7 +70,12 @@ public class Atom extends Point2D.Double implements Gravitation, Drawable, Phisi
 	 * @param binder
 	 */
 	public void addBinder(Binder binder) {
-		this.binder.add(binder);
+		this.binders.add(binder);
+	}
+	
+	public void addForce(Point2D.Double force) {
+		avergeForce.x += force.x;
+		avergeForce.y += force.y;
 	}
 	
 	@Override
@@ -74,13 +88,33 @@ public class Atom extends Point2D.Double implements Gravitation, Drawable, Phisi
 
 	@Override
 	public void calculePhisic(double time) {
-		// TODO Auto-generated method stub
-		
+		if(simulatePhisic) {
+			
+			for(Binder t : binders) {
+				this.addForce(t.calculeForce(this));
+			}
+			
+			avergeForce.x += Phisic.GRAVITATION_FORCE;
+			acceleration.x = avergeForce.x / weight;
+			acceleration.y = avergeForce.y / weight;
+			avergeForce = new Point2D.Double();
+			
+			velocity.x += acceleration.x * time;
+			velocity.y += acceleration.y * time;
+			
+			x += velocity.x * time;
+			y += velocity.y * time;
+		}
 	}
 	
-	// Getters
+	// getters
 	public Point2D.Double getVelocity() { return velocity; }
-	public Point2D.Double getAvergeForce() { return avergeForce; }
+	public Point2D.Double getAvergeForce() { return new Point2D.Double(avergeForce.x + Phisic.GRAVITATION_FORCE, avergeForce.y); }
 	public Point2D.Double getAcceleration() { return acceleration; }
+	public double getWeight() { return weight; }
+	public boolean isSimulatePhisic() { return simulatePhisic; }
+
+	// setters
+	public void setPhisicSimulation(boolean simulatePhisic) { this.simulatePhisic = simulatePhisic; }
 	
 }

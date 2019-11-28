@@ -1,5 +1,10 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import com.gmail.aspoka1.molecularphisic.phisic.Phisic;
+
 public class GameContainer implements Runnable {
 	private Thread thread;
 	private Panel c;
@@ -7,8 +12,14 @@ public class GameContainer implements Runnable {
 	private boolean running = false;
 	private final double UPDATE_CUP = 1.0 / 60.0;
 	
+	List<Phisic> toSimulate = new LinkedList<>();
+	
 	public GameContainer(Panel c) {
 		this.c = c;
+	}
+	
+	public void addPhisicComponent(Phisic component) {
+		toSimulate.add(component);
 	}
 	
 	public void start() {
@@ -48,6 +59,9 @@ public class GameContainer implements Runnable {
 				unprocessedTime -= UPDATE_CUP;
 				render = true;
 				// TODO: update game
+				for(Phisic t : toSimulate) {
+					t.calculePhisic(UPDATE_CUP);
+				}
 				
 				
 				if(frameTime >= 1.0) {

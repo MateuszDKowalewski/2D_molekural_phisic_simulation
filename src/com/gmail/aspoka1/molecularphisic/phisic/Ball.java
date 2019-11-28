@@ -6,13 +6,14 @@ import java.awt.geom.Point2D;
 
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 
-public class Ball implements Phisic, Drawable, Gravitation{
+public class Ball implements Phisic, Drawable{
+	
 	private Atom preasure;
 	private Atom[] surface;
 	private Binder[] binders;
 	
 	public Ball(double x, double y, int atomsAmount, double radius) {
-		preasure = new Atom(x, y);
+		preasure = new Atom(x, y, atomsAmount);
 		
 		surface = new Atom[atomsAmount];
 		binders = new Binder[2 * atomsAmount];
@@ -20,7 +21,7 @@ public class Ball implements Phisic, Drawable, Gravitation{
 		Point2D.Double temp = new Point2D.Double();
 		for(int i = 0; i < atomsAmount; i++) {
 			AffineTransform.getRotateInstance(Math.toRadians(360 / atomsAmount * i), x, y).transform(new Point2D.Double(x, y - radius), temp);
-			surface[i] = new Atom(temp);
+			surface[i] = new Atom(temp, 1.0);
 		}
 		
 		Binder bind;
