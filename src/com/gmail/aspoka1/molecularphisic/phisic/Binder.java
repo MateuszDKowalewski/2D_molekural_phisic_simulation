@@ -65,7 +65,7 @@ public class Binder implements Drawable{
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GRAY);
 		g.drawLine((int)a1.getX(), (int)a1.getY(), (int)a2.getX(), (int)a2.getY());
 	}
 	

@@ -3,6 +3,8 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
+import com.gmail.aspoka1.molecularphisic.phisic.DynamicCollisionable;
 import com.gmail.aspoka1.molecularphisic.phisic.Phisic;
 
 public class GameContainer implements Runnable {
@@ -13,6 +15,8 @@ public class GameContainer implements Runnable {
 	private final double UPDATE_CUP = 1.0 / 60.0;
 	
 	List<Phisic> toSimulate = new LinkedList<>();
+	List<StaticCollisionable> staticCollisionable = new LinkedList<>();
+	List<DynamicCollisionable> dynamicCollisionables = new LinkedList<>();
 	
 	public GameContainer(Panel c) {
 		this.c = c;
@@ -20,6 +24,14 @@ public class GameContainer implements Runnable {
 	
 	public void addPhisicComponent(Phisic component) {
 		toSimulate.add(component);
+	}
+	
+	public void addStaticCollisionableComponent(StaticCollisionable component) {
+		staticCollisionable.add(component);
+	}
+	
+	public void addDynamicCollisionableComponent(DynamicCollisionable component) {
+		dynamicCollisionables.add(component);
 	}
 	
 	public void start() {
@@ -63,6 +75,13 @@ public class GameContainer implements Runnable {
 					t.calculePhisic(UPDATE_CUP);
 				}
 				
+				for(DynamicCollisionable d : dynamicCollisionables) {
+					for(StaticCollisionable s : staticCollisionable) {
+						if(s.isInCollision(d.getPosition())) {
+							d.setPosiotion(s.calculeIntersection(d.getPosition(), d.getLastPosition()));
+						}
+					}
+				}
 				
 				if(frameTime >= 1.0) {
 					frameTime = 0;

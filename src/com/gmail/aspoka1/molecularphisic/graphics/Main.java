@@ -1,7 +1,11 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
+import java.awt.geom.Point2D;
+
 import com.gmail.aspoka1.molecularphisic.phisic.Atom;
-import com.gmail.aspoka1.molecularphisic.phisic.Binder;
+import com.gmail.aspoka1.molecularphisic.phisic.Ball;
+import com.gmail.aspoka1.molecularphisic.phisic.CollisionBlock;
+import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
 
 public class Main {
 	public static final int WIDTH = 640;
@@ -13,7 +17,6 @@ public class Main {
 		GameContainer gc = new GameContainer(frame.getCanvas());
 		
 		//frame.addDrawableElement(new Ball(WIDTH / 2, HEIGHT / 2, 60, 200));
-		
 		
 		// pendulum test
 		/*
@@ -44,6 +47,17 @@ public class Main {
 		gc.addPhisicComponent(a1);
 		gc.addPhisicComponent(a2);
 		*/
+		
+		// collision test
+		CollisionBlock c = new CollisionBlock(0, 400, 640, 80);
+		frame.addDrawableElement(c);
+		
+
+		Atom a = new Atom(new Point2D.Double(100.0, 100.0), 1.0);
+		frame.addDrawableElement(a);
+		gc.addPhisicComponent(a);
+		
+		
 		
 		gc.start();
 	}

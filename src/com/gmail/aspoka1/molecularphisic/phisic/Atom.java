@@ -17,7 +17,7 @@ import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
  * @version 1.0
  * @author aspoka
  */
-public class Atom extends Point2D.Double implements Drawable, Phisic{
+public class Atom extends Point2D.Double implements Drawable, Phisic, DynamicCollisionable{
 	private static final long serialVersionUID = -367935700757882281L;
 
 	private boolean simulatePhisic;
@@ -25,6 +25,8 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 	private Point2D.Double velocity = new Point2D.Double();
 	private Point2D.Double acceleration = new Point2D.Double();
 	private Point2D.Double avergeForce = new Point2D.Double();
+	
+	private Point2D.Double lastPosition;
 	
 	private static final int radius = 2;
 	private double weight;
@@ -35,6 +37,7 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 		super(p.x, p.y);
 		this.weight = weight;
 		this.setPhisicSimulation(true);
+		this.lastPosition = new Point2D.Double(this.x, this.y);
 	}
 	
 	/**
@@ -46,6 +49,7 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 		super(x, y);
 		this.weight = weight;
 		this.setPhisicSimulation(true);
+		this.lastPosition = new Point2D.Double(this.x, this.y);
 	}
 	
 	/**
@@ -62,6 +66,7 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 			this.binders.add(t);
 		}
 		this.setPhisicSimulation(true);
+		this.lastPosition = new Point2D.Double(this.x, this.y);
 	}
 	
 	/**
@@ -89,6 +94,8 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 	@Override
 	public void calculePhisic(double time) {
 		if(simulatePhisic) {
+			lastPosition.x = this.x;
+			lastPosition.y = this.y;
 			
 			for(Binder t : binders) {
 				this.addForce(t.calculeForce(this));
@@ -121,8 +128,11 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 	public Point2D.Double getAcceleration() { return acceleration; }
 	public double getWeight() { return weight; }
 	public boolean isSimulatePhisic() { return simulatePhisic; }
-
+	public Double getPosition() { return new Point2D.Double(x, y); }
+	public Point2D.Double getLastPosition() { return lastPosition; }
+	
 	// setters
 	public void setPhisicSimulation(boolean simulatePhisic) { this.simulatePhisic = simulatePhisic; }
+	public void setPosiotion(Double p) { this.x = p.x; this.y = p.y; }
 	
 }
