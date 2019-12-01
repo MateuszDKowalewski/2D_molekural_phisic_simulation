@@ -16,6 +16,8 @@ public class Binder implements Drawable{
 	private Atom a1;
 	private Atom a2;
 	
+	private double k;
+	
 	private double defaultLenght;
 	
 	public Binder(Atom a1, Atom a2) {
@@ -24,14 +26,16 @@ public class Binder implements Drawable{
 		a1.addBinder(this);
 		a2.addBinder(this);
 		this.defaultLenght = a1.distance(a2);
+		this.k = 1;
 	}
 	
-	public Binder(Atom a1, Atom a2, double defaultLenght) {
+	public Binder(Atom a1, Atom a2, double k) {
 		this.a1 = a1;
 		this.a2 = a2;
 		a1.addBinder(this);
 		a2.addBinder(this);
-		this.defaultLenght = defaultLenght;
+		this.defaultLenght = a1.distance(a2);
+		this.k = k;
 	}
 	
 	public Point2D.Double calculeForce(Atom a) {
@@ -40,16 +44,10 @@ public class Binder implements Drawable{
 		double yForce;
 		
 		double lenght = a1.distance(a2);
+		double lenghtDelta = lenght - defaultLenght;
 		double forceLenght;
-		double x = Math.abs(lenght - defaultLenght);
 		
-		if(lenght < defaultLenght) {
-			forceLenght = -Math.exp(x);
-		} else if(lenght > defaultLenght) {
-			forceLenght = Math.exp(x);
-		} else {
-			forceLenght = 0;
-		}
+		forceLenght = k * lenghtDelta;
 		
 		xForce = (a2.x - a1.x) / defaultLenght * forceLenght;
 		yForce = (a2.y - a1.y) / defaultLenght * forceLenght;

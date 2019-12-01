@@ -22,6 +22,7 @@ public class DrawFrame extends JFrame {
 		c = new Panel(width, height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(c);
+		setResizable(false);
 		pack();
 		setVisible(true);
 	}

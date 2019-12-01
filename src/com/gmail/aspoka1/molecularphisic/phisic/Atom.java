@@ -93,18 +93,26 @@ public class Atom extends Point2D.Double implements Drawable, Phisic{
 			for(Binder t : binders) {
 				this.addForce(t.calculeForce(this));
 			}
+
+			//System.out.println(this);
 			
-			avergeForce.x += Phisic.GRAVITATION_FORCE;
+			avergeForce.y += Phisic.GRAVITATION_FORCE * weight;
+
 			acceleration.x = avergeForce.x / weight;
 			acceleration.y = avergeForce.y / weight;
-			avergeForce = new Point2D.Double();
 			
 			velocity.x += acceleration.x * time;
 			velocity.y += acceleration.y * time;
 			
 			x += velocity.x * time;
 			y += velocity.y * time;
+			
+			avergeForce = new Point2D.Double();
 		}
+	}
+	
+	public String toString() {
+		return super.toString() + avergeForce.toString() + acceleration.toString() + velocity.toString();
 	}
 	
 	// getters

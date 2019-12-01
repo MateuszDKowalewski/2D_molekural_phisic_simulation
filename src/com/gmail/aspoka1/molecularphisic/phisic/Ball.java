@@ -27,15 +27,15 @@ public class Ball implements Phisic, Drawable{
 		Binder bind;
 		for(int i = 0; i < atomsAmount; i++) {
 			bind = new Binder(preasure, surface[i]);
-			surface[i].addBinder(bind);
-			preasure.addBinder(bind);
+			//surface[i].addBinder(bind);
+			//preasure.addBinder(bind);
 			binders[i] =bind;
 		}
 		
 		for(int i = 0; i < atomsAmount - 1; i++) {
 			bind = new Binder(surface[i], surface[i + 1]);
-			surface[i].addBinder(bind);
-			surface[i + 1].addBinder(bind);
+			//surface[i].addBinder(bind);
+			//surface[i + 1].addBinder(bind);
 			binders[i + atomsAmount] = bind;
 		}
 		
