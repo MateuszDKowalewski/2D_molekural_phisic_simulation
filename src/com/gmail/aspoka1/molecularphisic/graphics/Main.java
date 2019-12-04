@@ -51,11 +51,13 @@ public class Main {
 		// collision test
 		CollisionBlock c = new CollisionBlock(0, 400, 640, 80);
 		frame.addDrawableElement(c);
+		gc.addStaticCollisionableComponent(c);
 		
 
 		Atom a = new Atom(new Point2D.Double(100.0, 100.0), 1.0);
 		frame.addDrawableElement(a);
 		gc.addPhisicComponent(a);
+		gc.addDynamicCollisionableComponent(a);
 		
 		
 		
