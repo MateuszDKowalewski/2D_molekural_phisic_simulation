@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 
-public class Ball implements Phisic, Drawable{
+public class Ball implements Phisic, Drawable, DynamicCollisionable{
 	
 	private Atom preasure;
 	private Atom[] surface;
@@ -26,20 +26,20 @@ public class Ball implements Phisic, Drawable{
 		
 		Binder bind;
 		for(int i = 0; i < atomsAmount; i++) {
-			bind = new Binder(preasure, surface[i]);
+			bind = new Binder(preasure, surface[i], 10.0);
 			//surface[i].addBinder(bind);
 			//preasure.addBinder(bind);
 			binders[i] =bind;
 		}
 		
 		for(int i = 0; i < atomsAmount - 1; i++) {
-			bind = new Binder(surface[i], surface[i + 1]);
+			bind = new Binder(surface[i], surface[i + 1], 10.0);
 			//surface[i].addBinder(bind);
 			//surface[i + 1].addBinder(bind);
 			binders[i + atomsAmount] = bind;
 		}
 		
-		bind = new Binder(surface[0], surface[atomsAmount - 1]);
+		bind = new Binder(surface[0], surface[atomsAmount - 1], 10.0);
 		surface[0].addBinder(bind);
 		surface[atomsAmount - 1].addBinder(bind);
 		binders[2 * atomsAmount - 1] = bind;
@@ -58,8 +58,19 @@ public class Ball implements Phisic, Drawable{
 
 	@Override
 	public void calculePhisic(double time) {
-		// TODO Auto-generated method stub
-		
+		for(Atom t : surface) {
+			t.calculePhisic(time);
+		}
+		preasure.calculePhisic(time);
+	}
+
+	@Override
+	public void calculeCollision(StaticCollisionable s) {
+		for(Atom d : surface) {
+			if(s.isInCollision(d.getPosition())) {
+				d.setPosiotion(s.calculeIntersection(d.getPosition(), d.getLastPosition()));
+			}
+		}
 	}
 	
 }

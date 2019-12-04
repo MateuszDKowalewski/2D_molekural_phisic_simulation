@@ -118,6 +118,13 @@ public class Atom extends Point2D.Double implements Drawable, Phisic, DynamicCol
 		}
 	}
 	
+	@Override
+	public void calculeCollision(StaticCollisionable s) {
+		if(s.isInCollision(getPosition())) {
+			setPosiotion(s.calculeIntersection(getPosition(), getLastPosition()));
+		}
+	}
+	
 	public String toString() {
 		return super.toString() + avergeForce.toString() + acceleration.toString() + velocity.toString();
 	}

@@ -47,10 +47,10 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
 	}
 
 	private boolean isSegmentCrossed(Point2D.Double p, Point2D.Double q, Point2D.Double r, Point2D.Double s) {
-		int o1 = orientation(p, r, q);
-		int o2 = orientation(p, r, s);
-		int o3 = orientation(q, s, p);
-		int o4 = orientation(q, s, r);
+		int o1 = orientation(p, q, r);
+		int o2 = orientation(p, q, s);
+		int o3 = orientation(r, s, p);
+		int o4 = orientation(r, s, q);
 
 		if (o1 != o2 && o3 != o4)
 			return true;

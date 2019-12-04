@@ -1,11 +1,7 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
-import java.awt.geom.Point2D;
-
-import com.gmail.aspoka1.molecularphisic.phisic.Atom;
 import com.gmail.aspoka1.molecularphisic.phisic.Ball;
 import com.gmail.aspoka1.molecularphisic.phisic.CollisionBlock;
-import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
 
 public class Main {
 	public static final int WIDTH = 640;
@@ -15,8 +11,6 @@ public class Main {
 	public static void main(String[] args) {
 		DrawFrame frame = new DrawFrame(WIDTH, HEIGHT, NAME);
 		GameContainer gc = new GameContainer(frame.getCanvas());
-		
-		//frame.addDrawableElement(new Ball(WIDTH / 2, HEIGHT / 2, 60, 200));
 		
 		// pendulum test
 		/*
@@ -49,6 +43,7 @@ public class Main {
 		*/
 		
 		// collision test
+		/*
 		CollisionBlock c = new CollisionBlock(0, 400, 640, 80);
 		frame.addDrawableElement(c);
 		gc.addStaticCollisionableComponent(c);
@@ -58,8 +53,25 @@ public class Main {
 		frame.addDrawableElement(a);
 		gc.addPhisicComponent(a);
 		gc.addDynamicCollisionableComponent(a);
+		*/
 		
+		CollisionBlock c = new CollisionBlock(0, 400, 640, 80);
+		frame.addDrawableElement(c);
+		gc.addStaticCollisionableComponent(c);
 		
+		Ball b = new Ball(WIDTH / 2, HEIGHT / 2, 20, 100);
+		frame.addDrawableElement(b);
+		gc.addPhisicComponent(b);
+		gc.addDynamicCollisionableComponent(b);
+		
+		/*
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 		
 		gc.start();
 	}

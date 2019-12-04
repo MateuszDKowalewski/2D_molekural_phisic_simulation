@@ -3,9 +3,9 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
 import com.gmail.aspoka1.molecularphisic.phisic.DynamicCollisionable;
 import com.gmail.aspoka1.molecularphisic.phisic.Phisic;
+import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
 
 public class GameContainer implements Runnable {
 	private Thread thread;
@@ -77,9 +77,10 @@ public class GameContainer implements Runnable {
 				
 				for(DynamicCollisionable d : dynamicCollisionables) {
 					for(StaticCollisionable s : staticCollisionable) {
-						if(s.isInCollision(d.getPosition())) {
-							d.setPosiotion(s.calculeIntersection(d.getPosition(), d.getLastPosition()));
-						}
+						d.calculeCollision(s);
+						/*
+						 
+						*/
 					}
 				}
 				
