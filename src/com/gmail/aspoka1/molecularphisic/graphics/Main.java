@@ -3,6 +3,9 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 import com.gmail.aspoka1.molecularphisic.phisic.Ball;
 import com.gmail.aspoka1.molecularphisic.phisic.CollisionBlock;
 
+/**
+ * Let's make first documentation to check if git works
+ */
 public class Main {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
