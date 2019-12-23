@@ -21,28 +21,27 @@ public class Ball implements Phisic, Drawable, DynamicCollisionable{
 		Point2D.Double temp = new Point2D.Double();
 		for(int i = 0; i < atomsAmount; i++) {
 			AffineTransform.getRotateInstance(Math.toRadians(360 / atomsAmount * i), x, y).transform(new Point2D.Double(x, y - radius), temp);
-			surface[i] = new Atom(temp, 1.0);
+			surface[i] = new Atom(temp, 7.0);
 		}
 		
 		Binder bind;
 		for(int i = 0; i < atomsAmount; i++) {
-			bind = new Binder(preasure, surface[i], 10.0);
-			//surface[i].addBinder(bind);
-			//preasure.addBinder(bind);
-			binders[i] =bind;
+			bind = new Binder(preasure, surface[i], 100.0);
+			binders[i] = bind;
 		}
 		
 		for(int i = 0; i < atomsAmount - 1; i++) {
-			bind = new Binder(surface[i], surface[i + 1], 10.0);
-			//surface[i].addBinder(bind);
-			//surface[i + 1].addBinder(bind);
+			bind = new Binder(surface[i], surface[i + 1], 80.0);
 			binders[i + atomsAmount] = bind;
 		}
 		
-		bind = new Binder(surface[0], surface[atomsAmount - 1], 10.0);
-		surface[0].addBinder(bind);
-		surface[atomsAmount - 1].addBinder(bind);
+		bind = new Binder(surface[0], surface[atomsAmount - 1], 80.0);
 		binders[2 * atomsAmount - 1] = bind;
+	}
+
+	@Override
+	public void print() {
+		// TODO: write print
 	}
 
 	@Override
@@ -65,11 +64,12 @@ public class Ball implements Phisic, Drawable, DynamicCollisionable{
 	}
 
 	@Override
-	public void calculeCollision(StaticCollisionable s) {
+	public void calculeCollision() {
 		for(Atom d : surface) {
-			if(s.isInCollision(d.getPosition())) {
+			d.calculeCollision();
+			/*if(s.isInCollision(d.getPosition())) {
 				d.setPosiotion(s.calculeIntersection(d.getPosition(), d.getLastPosition()));
-			}
+			}*/
 		}
 	}
 	

@@ -4,4 +4,5 @@ public interface Phisic {
 	public final static double GRAVITATION_FORCE = 9.81;
 	
 	public void calculePhisic(double time);
+	public void print();
 }

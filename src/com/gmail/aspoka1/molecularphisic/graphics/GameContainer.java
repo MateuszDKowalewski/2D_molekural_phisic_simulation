@@ -73,15 +73,16 @@ public class GameContainer implements Runnable {
 				// TODO: update game
 				for(Phisic t : toSimulate) {
 					t.calculePhisic(UPDATE_CUP);
+					t.print();
 				}
 				
 				for(DynamicCollisionable d : dynamicCollisionables) {
-					for(StaticCollisionable s : staticCollisionable) {
-						d.calculeCollision(s);
+					// for(StaticCollisionable s : staticCollisionable) {
+						d.calculeCollision();
 						/*
 						 
 						*/
-					}
+					// }
 				}
 				
 				if(frameTime >= 1.0) {

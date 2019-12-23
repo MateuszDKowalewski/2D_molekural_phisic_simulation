@@ -35,7 +35,7 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
 			return whereLineCrossed(p1, p2, new Point2D.Double(x + width, y + height), new Point2D.Double(x + width, y));
 		} else if(isSegmentCrossed(p1, p2, new Point2D.Double(x + width, y + height), new Point2D.Double(x, y + height))) {
 			return whereLineCrossed(p1, p2, new Point2D.Double(x + width, y + height), new Point2D.Double(x, y + height));
-		} 
+		}
 
 		return null;
 	}
@@ -46,7 +46,7 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
 		g.fillRect((int) x, (int) y, (int) width, (int) height);
 	}
 
-	private boolean isSegmentCrossed(Point2D.Double p, Point2D.Double q, Point2D.Double r, Point2D.Double s) {
+	public boolean isSegmentCrossed(Point2D.Double p, Point2D.Double q, Point2D.Double r, Point2D.Double s) {
 		int o1 = orientation(p, q, r);
 		int o2 = orientation(p, q, s);
 		int o3 = orientation(r, s, p);
@@ -55,7 +55,7 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
 		if (o1 != o2 && o3 != o4)
 			return true;
 
-		// TODO: Is this needless?
+		// TODO: Is this needless
 		/*
 		if (o1 == 0 && onSegment(p, q, r))
 			return true;
@@ -82,7 +82,7 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
 		return (val > 0) ? 1 : 2; // clock or counter clock wise
 	}
 
-	private Point2D.Double whereLineCrossed(Point2D.Double p, Point2D.Double q, Point2D.Double r, Point2D.Double s) {
+	public Point2D.Double whereLineCrossed(Point2D.Double p, Point2D.Double q, Point2D.Double r, Point2D.Double s) {
 		Point2D.Double u;
 		// Point2D.Double v;
 		double a;
