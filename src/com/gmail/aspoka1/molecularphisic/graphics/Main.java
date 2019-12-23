@@ -68,28 +68,18 @@ public class Main {
 		frame.addDrawableElement(c);
 		gc.addStaticCollisionableComponent(c);
 		
-		Ball b = new Ball(WIDTH / 2, HEIGHT / 2 - 50, 30, 100);
+		Ball b = new Ball(WIDTH / 2, HEIGHT / 2 - 100, 20, 100);
 		frame.addDrawableElement(b);
 		gc.addPhisicComponent(b);
 		gc.addDynamicCollisionableComponent(b);
 
-		Point2D.Double p = new Point2D.Double(0, 10);
-		Point2D.Double q = new Point2D.Double(20, 10);
-		Point2D.Double r = new Point2D.Double(10, 10);
-		Point2D.Double s = new Point2D.Double(15, 20);
 
-		System.out.println(c.isInCollision(new Point2D.Double(100, 400)));
-		System.out.println(c.isSegmentCrossed(p, q, s, r));
-
-
-
-		/*
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		*/
+
 		
 		gc.start();
 	}

@@ -13,7 +13,7 @@ public class Ball implements Phisic, Drawable, DynamicCollisionable{
 	private Binder[] binders;
 	
 	public Ball(double x, double y, int atomsAmount, double radius) {
-		preasure = new Atom(x, y, atomsAmount);
+		preasure = new Atom(x, y, 50.0);
 		
 		surface = new Atom[atomsAmount];
 		binders = new Binder[2 * atomsAmount];
@@ -21,7 +21,7 @@ public class Ball implements Phisic, Drawable, DynamicCollisionable{
 		Point2D.Double temp = new Point2D.Double();
 		for(int i = 0; i < atomsAmount; i++) {
 			AffineTransform.getRotateInstance(Math.toRadians(360 / atomsAmount * i), x, y).transform(new Point2D.Double(x, y - radius), temp);
-			surface[i] = new Atom(temp, 7.0);
+			surface[i] = new Atom(temp, 1.0);
 		}
 		
 		Binder bind;
@@ -31,12 +31,44 @@ public class Ball implements Phisic, Drawable, DynamicCollisionable{
 		}
 		
 		for(int i = 0; i < atomsAmount - 1; i++) {
-			bind = new Binder(surface[i], surface[i + 1], 80.0);
+			bind = new Binder(surface[i], surface[i + 1], 100.0);
 			binders[i + atomsAmount] = bind;
 		}
 		
-		bind = new Binder(surface[0], surface[atomsAmount - 1], 80.0);
+		bind = new Binder(surface[0], surface[atomsAmount - 1], 100.0);
 		binders[2 * atomsAmount - 1] = bind;
+	}
+
+	@Override
+	public void calculeForce(double time) {
+		preasure.calculeForce(time);
+		for(Atom a : surface) {
+			a.calculeForce(time);
+		}
+	}
+
+	@Override
+	public void calculeAcceleration(double time) {
+		preasure.calculeAcceleration(time);
+		for(Atom a : surface) {
+			a.calculeAcceleration(time);
+		}
+	}
+
+	@Override
+	public void calculeVelocity(double time) {
+		preasure.calculeVelocity(time);
+		for(Atom a : surface) {
+			a.calculeVelocity(time);
+		}
+	}
+
+	@Override
+	public void calculePosition(double time) {
+		preasure.calculePosition(time);
+		for(Atom a : surface) {
+			a.calculePosition(time);
+		}
 	}
 
 	@Override
@@ -53,14 +85,6 @@ public class Ball implements Phisic, Drawable, DynamicCollisionable{
 		for(Atom t : surface) {
 			t.paint(g);
 		}
-	}
-
-	@Override
-	public void calculePhisic(double time) {
-		for(Atom t : surface) {
-			t.calculePhisic(time);
-		}
-		preasure.calculePhisic(time);
 	}
 
 	@Override

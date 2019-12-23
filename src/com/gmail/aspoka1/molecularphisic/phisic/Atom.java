@@ -97,42 +97,56 @@ public class Atom extends Point2D.Double implements Drawable, Phisic, DynamicCol
     }
 
     @Override
-    public void calculePhisic(double time) {
-        if (simulatePhisic) {
-            lastPosition.x = this.x;
-            lastPosition.y = this.y;
-
-            avergeForce = new Point2D.Double();
-            for (Binder t : binders) {
-                this.addForce(t.calculeForce(this));
-            }
-
-            avergeForce.y += Phisic.GRAVITATION_FORCE * weight;
-
-            acceleration.x = avergeForce.x / weight;
-            acceleration.y = avergeForce.y / weight;
-
-            velocity.x += acceleration.x * time;
-            velocity.y += acceleration.y * time;
-
-            velocity.x *= 0.99;
-            velocity.y *= 0.99;
-
-            x += velocity.x * time;
-            y += velocity.y * time;
-        }
-    }
-
-    @Override
     public void calculeCollision() {
         if (this.y > 400) {
             this.y = 400;
             velocity.y = 0;
+            acceleration.y = 0;
         }
     }
 
     public String toString() {
         return super.toString() + avergeForce.toString() + acceleration.toString() + velocity.toString();
+    }
+
+    @Override
+    public void calculeForce(double time) {
+        if(simulatePhisic) {
+            avergeForce = new Point2D.Double();
+            for (Binder t : binders) {
+                this.addForce(t.calculeForce(this));
+            }
+            avergeForce.y += Phisic.GRAVITATION_FORCE * weight;
+        }
+    }
+
+    @Override
+    public void calculeAcceleration(double time) {
+        if(simulatePhisic) {
+            acceleration.x = avergeForce.x / weight;
+            acceleration.y = avergeForce.y / weight;
+        }
+    }
+
+    @Override
+    public void calculeVelocity(double time) {
+        if(simulatePhisic) {
+            velocity.x += acceleration.x * time;
+            velocity.y += acceleration.y * time;
+
+            //velocity.x *= 0.99;
+            //velocity.y *= 0.99;
+        }
+    }
+
+    @Override
+    public void calculePosition(double time) {
+        if(simulatePhisic) {
+            lastPosition.x = this.x;
+            lastPosition.y = this.y;
+            x += velocity.x * time;
+            y += velocity.y * time;
+        }
     }
 
     public void print() {
