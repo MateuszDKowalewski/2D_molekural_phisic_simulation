@@ -3,9 +3,8 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gmail.aspoka1.molecularphisic.phisic.DynamicCollisionable;
 import com.gmail.aspoka1.molecularphisic.phisic.Physic;
-import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
+import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisional;
 
 public class GameContainer implements Runnable {
 
@@ -16,8 +15,7 @@ public class GameContainer implements Runnable {
 	private final double UPDATE_CUP = 1.0 / 60.0;
 
 	List<Physic> toSimulate = new LinkedList<>();
-	List<StaticCollisionable> staticCollisionable = new LinkedList<>();
-	List<DynamicCollisionable> dynamicCollisionables = new LinkedList<>();
+	List<StaticCollisional> staticCollisionable = new LinkedList<>();
 
 	public GameContainer() {
 		thread = new Thread(this);
@@ -74,7 +72,7 @@ public class GameContainer implements Runnable {
 				for(Physic t : toSimulate) {
 					t.calculatePosition(UPDATE_CUP);
 				}
-				for(DynamicCollisionable d : dynamicCollisionables) {
+				for(Physic d : toSimulate) {
 					d.calculateCollision();
 				}
 
@@ -113,16 +111,11 @@ public class GameContainer implements Runnable {
 		toSimulate.add(component);
 	}
 
-	public void addStaticCollisionableComponent(StaticCollisionable component) {
+	public void addStaticCollisionableComponent(StaticCollisional component) {
 		staticCollisionable.add(component);
-	}
-
-	public void addDynamicCollisionableComponent(DynamicCollisionable component) {
-		dynamicCollisionables.add(component);
 	}
 
 	public void clear(){
 		toSimulate = new LinkedList<>();
-		dynamicCollisionables = new LinkedList<>();
 	}
 }

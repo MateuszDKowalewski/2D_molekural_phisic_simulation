@@ -7,7 +7,16 @@ import java.awt.geom.Point2D;
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 import com.gmail.aspoka1.molecularphisic.Main;
 
-public class Ball implements Physic, Drawable, DynamicCollisionable{
+/**
+ * Basic class of simple ball. Ball is made from atoms on circle circuit spread evenly.
+ * To simulate air, or other pressure source, in center of the ball is one atom connected witch each atom on circuit.
+ * In each frame ball should be calculated in specified order:
+ * add all forces -> calculateForce -> calculateAcceleration -> calculateVelocity -> calculatePosition
+ *
+ * @author aspoka
+ * @version 2.0     27.12.2019
+ */
+public class Ball implements Physic, Drawable {
 
 	public static final int DEFAULT_INIT_ATOMS_AMOUNT = 20;
 	public static final int DEFAULT_INIT_RADIUS = 100;

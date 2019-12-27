@@ -18,7 +18,7 @@ import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
  * @author aspoka
  * @version 2.0     27.12.2019
  */
-public class Atom extends Point2D.Double implements Drawable, Physic, DynamicCollisionable {
+public class Atom extends Point2D.Double implements Drawable, Physic {
     private static final long serialVersionUID = -367935700757882281L;
 
     public static final int DEFAULT_INITIAL_WEIGHT = 1;
