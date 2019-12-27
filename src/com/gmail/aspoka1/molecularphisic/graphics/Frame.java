@@ -1,6 +1,7 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
-import java.awt.Canvas;
+import com.gmail.aspoka1.molecularphisic.Main;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,60 +11,46 @@ import java.util.List;
 import javax.swing.*;
 
 
-public class DrawFrame extends JFrame {
+public class Frame extends JFrame {
 	private static final long serialVersionUID = 801486476992470583L;
 
-	GenerateBallPanel gbp;
-
+	private GenerateBallPanel gbp;
 	private Panel c;
-
-	int width;
-	int height;
-	int sideBarWidth;
 	
-	public DrawFrame(int width, int sideBarWidth, int height, String name, GameContainer gc) {
+	public Frame(GameContainer gc) {
 		super();
-		setTitle(name);
-		c = new Panel(width, sideBarWidth, height);
-		gbp = new GenerateBallPanel(sideBarWidth, height, width, 0, c, this, gc);
+		setTitle(Main.NAME);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		c = new Panel(Main.WIDTH, GenerateBallPanel.WIDTH, Main.HEIGHT);
 		add(c);
-		getContentPane().setBackground(Color.red); // why dont work
-		setBackground(Color.red);
 		setResizable(false);
-		pack();
 		setVisible(true);
+		pack();
 
-		this.width = width;
-		this.sideBarWidth = sideBarWidth;
-		this.height = height;
+		gbp = new GenerateBallPanel(c, this, gc);
 	}
 
 	public void clear() {
 		c.clear();
 	}
 
+	// TODO: add collision with static block and remove it
 	public void setGround(Drawable ground) {
 		c.setGround(ground);
 	}
 	
 	public void addDrawableElement (Drawable e) {
-		c.addDravableElement(e);
+		c.addDrawableElement(e);
 	}
 	
 	// getters
 	public Panel getCanvas() { return c; }
-
 }
 
 class Panel extends JPanel {
 	private static final long serialVersionUID = -6832117658886512528L;
 
-	JButton generate;
-	JButton start;
-	JButton end;
-
-	Drawable ground;
+	Drawable ground; // TODO: delete
 	List<Drawable> elements = new LinkedList<>();
 
 	int width;
@@ -106,12 +93,8 @@ class Panel extends JPanel {
 		elements = new LinkedList<>();
 	}
 
-	public void addDravableElement(Drawable e) {
+	public void addDrawableElement(Drawable e) {
 		elements.add(e);
-	}
-
-	public void clearDrawableElements() {
-		elements.clear();
 	}
 }
 

@@ -7,7 +7,6 @@ import com.gmail.aspoka1.molecularphisic.phisic.Physic;
 import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisional;
 
 public class GameContainer implements Runnable {
-
 	private Thread thread;
 	private Panel c;
 
@@ -15,29 +14,18 @@ public class GameContainer implements Runnable {
 	private final double UPDATE_CUP = 1.0 / 60.0;
 
 	List<Physic> toSimulate = new LinkedList<>();
-	List<StaticCollisional> staticCollisionable = new LinkedList<>();
+	List<StaticCollisional> staticCollisionalsBlock = new LinkedList<>();
 
 	public GameContainer() {
 		thread = new Thread(this);
 	}
 
-	public void start() {
-		System.out.println("start");
-		running = true;
-		//thread.run();
-	}
-
-	public void stop() throws InterruptedException {
-		System.out.println("stop");
-		running = false;
-	}
-
 	@Override
 	public void run() {
-		boolean render = false;
-		double firstTime = 0;
+		boolean render;
+		double firstTime;
 		double lastTime = System.nanoTime() / 1000000000.0;
-		double passedTime = 0;
+		double passedTime;
 		double unprocessedTime = 0;
 
 		double frameTime = 0;
@@ -75,7 +63,6 @@ public class GameContainer implements Runnable {
 				for(Physic d : toSimulate) {
 					d.calculateCollision();
 				}
-
 				if(frameTime >= 1.0) {
 					frameTime = 0;
 					fps = frames;
@@ -99,6 +86,14 @@ public class GameContainer implements Runnable {
 		dispose();
 	}
 
+	public void start() {
+		running = true;
+	}
+
+	public void stop() {
+		running = false;
+	}
+
 	private void dispose() {
 
 	}
@@ -107,15 +102,11 @@ public class GameContainer implements Runnable {
 		this.c = c;
 	}
 
-	public void addPhisicComponent(Physic component) {
+	public void addPhysicComponent(Physic component) {
 		toSimulate.add(component);
 	}
 
-	public void addStaticCollisionableComponent(StaticCollisional component) {
-		staticCollisionable.add(component);
-	}
-
-	public void clear(){
-		toSimulate = new LinkedList<>();
+	public void addStaticCollisionalComponent(StaticCollisional component) {
+		staticCollisionalsBlock.add(component);
 	}
 }
