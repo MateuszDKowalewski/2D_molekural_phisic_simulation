@@ -42,7 +42,7 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GREEN);
 		g.fillRect((int) x, (int) y, (int) width, (int) height);
 	}
 

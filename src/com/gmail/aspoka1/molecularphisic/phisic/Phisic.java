@@ -7,7 +7,4 @@ public interface Phisic {
 	public void calculeAcceleration(double time);
 	public void calculeVelocity(double time);
 	public void calculePosition(double time);
-
-
-	public void print();
 }

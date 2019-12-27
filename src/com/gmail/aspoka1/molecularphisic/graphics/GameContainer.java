@@ -3,11 +3,14 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.gmail.aspoka1.molecularphisic.ThreadController;
 import com.gmail.aspoka1.molecularphisic.phisic.DynamicCollisionable;
 import com.gmail.aspoka1.molecularphisic.phisic.Phisic;
 import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisionable;
 
 public class GameContainer implements Runnable {
+	private ThreadController tc;
+
 	private Thread thread;
 	private Panel c;
 	
@@ -17,35 +20,25 @@ public class GameContainer implements Runnable {
 	List<Phisic> toSimulate = new LinkedList<>();
 	List<StaticCollisionable> staticCollisionable = new LinkedList<>();
 	List<DynamicCollisionable> dynamicCollisionables = new LinkedList<>();
-	
-	public GameContainer(Panel c) {
-		this.c = c;
-	}
-	
-	public void addPhisicComponent(Phisic component) {
-		toSimulate.add(component);
-	}
-	
-	public void addStaticCollisionableComponent(StaticCollisionable component) {
-		staticCollisionable.add(component);
-	}
-	
-	public void addDynamicCollisionableComponent(DynamicCollisionable component) {
-		dynamicCollisionables.add(component);
+
+	public GameContainer() {
+		thread = new Thread(this);
+		this.tc = tc;
 	}
 	
 	public void start() {
-		thread = new Thread(this);
-		thread.run();
-	}
-	
-	public void stop() {
-		
-	}
-	
-	public void run() {
+		System.out.println("start");
 		running = true;
-		
+		//thread.run();
+	}
+	
+	public void stop() throws InterruptedException {
+		System.out.println("stop");
+		running = false;
+	}
+
+	@Override
+	public void run() {
 		boolean render = false;
 		double firstTime = 0;
 		double lastTime = System.nanoTime() / 1000000000.0;
@@ -56,7 +49,9 @@ public class GameContainer implements Runnable {
 		int frames = 0;
 		@SuppressWarnings("unused")
 		int fps = 0;
-		
+
+		running = true;
+
 		while(running) {
 			render = false;
 			
@@ -104,6 +99,7 @@ public class GameContainer implements Runnable {
 			
 			if(render) {
 				frames++;
+				System.out.println(fps);
 				// TODO: render game
 				c.repaint();
 			} else {
@@ -122,4 +118,24 @@ public class GameContainer implements Runnable {
 		
 	}
 
+	public void setPanel(Panel c) {
+		this.c = c;
+	}
+
+	public void addPhisicComponent(Phisic component) {
+		toSimulate.add(component);
+	}
+
+	public void addStaticCollisionableComponent(StaticCollisionable component) {
+		staticCollisionable.add(component);
+	}
+
+	public void addDynamicCollisionableComponent(DynamicCollisionable component) {
+		dynamicCollisionables.add(component);
+	}
+
+	public void clear(){
+		toSimulate = new LinkedList<>();
+		dynamicCollisionables = new LinkedList<>();
+	}
 }

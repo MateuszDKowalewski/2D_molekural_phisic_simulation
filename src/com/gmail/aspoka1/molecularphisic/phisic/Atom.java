@@ -149,12 +149,6 @@ public class Atom extends Point2D.Double implements Drawable, Phisic, DynamicCol
         }
     }
 
-    public void print() {
-        if (isPrintable()) {
-            System.out.println(this.toString());
-        }
-    }
-
     // getters
     public Point2D.Double getVelocity() {
         return velocity;
