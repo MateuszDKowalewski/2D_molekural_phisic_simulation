@@ -2,11 +2,7 @@ package com.gmail.aspoka1.molecularphisic;
 
 import com.gmail.aspoka1.molecularphisic.graphics.DrawFrame;
 import com.gmail.aspoka1.molecularphisic.graphics.GameContainer;
-import com.gmail.aspoka1.molecularphisic.phisic.Atom;
-import com.gmail.aspoka1.molecularphisic.phisic.Ball;
 import com.gmail.aspoka1.molecularphisic.phisic.CollisionBlock;
-
-import java.awt.geom.Point2D;
 
 /**
  * Let's make first documentation to check if git works
