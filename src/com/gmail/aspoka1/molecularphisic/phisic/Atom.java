@@ -27,12 +27,12 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
     private Point2D.Double lastPosition;
     private boolean simulatePhysic;
 
-    private Point2D.Double velocity = new Point2D.Double();
-    private Point2D.Double acceleration = new Point2D.Double();
-    private Point2D.Double averageForce = new Point2D.Double();
+    private Point2D.Double velocity;
+    private Point2D.Double acceleration;
+    private Point2D.Double averageForce;
     private double weight;
 
-    private List<Binder> binders = new LinkedList<>();
+    private List<Binder> binders;
 
     /**
      * Create atom with specified position and weight
@@ -47,6 +47,10 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
         this.weight = weight;
         this.setPhysicSimulation(true);
         this.lastPosition = new Point2D.Double(this.x, this.y);
+        velocity = new Point2D.Double();
+        acceleration = new Point2D.Double();
+        averageForce = new Point2D.Double();
+        binders = new LinkedList<>();
     }
 
     /**
@@ -167,6 +171,7 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
     /**
      * Calculate collisions and change position to avoid theme
      * This function should be used only once per frame
+     * TODO: calculate collision with StaticCollisional objects
      */
     @Override
     public void calculateCollision() {
@@ -193,9 +198,6 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
     // getters
     public Point2D.Double getVelocity() {
         return velocity;
-    }
-    public Point2D.Double getAverageForce() {
-        return new Point2D.Double(averageForce.x + Physic.GRAVITATION_FORCE, averageForce.y);
     }
     public Point2D.Double getAcceleration() {
         return acceleration;

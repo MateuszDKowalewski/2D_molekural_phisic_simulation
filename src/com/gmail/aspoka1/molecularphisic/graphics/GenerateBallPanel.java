@@ -30,12 +30,12 @@ public class GenerateBallPanel implements ActionListener{
         this.panel = panel;
         this.frame = frame;
 
-        this.atomAmounts = 20;
-        this.radius = 100;
-        this.surfaceAtomWeight = 1;
-        this.centerAtomWeight = 20;
-        this.surfaceElasticity = 10;
-        this.pressure = 30;
+        this.atomAmounts = Ball.DEFAULT_INIT_ATOMS_AMOUNT;
+        this.radius = Ball.DEFAULT_INIT_RADIUS;
+        this.surfaceAtomWeight = Ball.DEFAULT_INIT_SURFACE_ATOM_WEIGHT;
+        this.centerAtomWeight = Ball.DEFAULT_INIT_AIR_WEIGHT;
+        this.surfaceElasticity = Ball.DEFAULT_INIT_SURFACE_ELASTICITY;
+        this.pressure = Ball.DEFAULT_INIT_AIR_PRESSURE;
         this.height = 0;
 
         JLabel label1 = new JLabel("<html>Atoms<br>Amount:</html>");
@@ -133,6 +133,7 @@ public class GenerateBallPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if("generate".equals(e.getActionCommand())){
             ball = new Ball(Main.WIDTH / 2, 400 - radius - height, atomAmounts, radius, surfaceAtomWeight, centerAtomWeight, surfaceElasticity, pressure);
+            //ball = new Ball();
             gc.addPhysicComponent(ball);
             frame.clear();
             frame.addDrawableElement(ball);

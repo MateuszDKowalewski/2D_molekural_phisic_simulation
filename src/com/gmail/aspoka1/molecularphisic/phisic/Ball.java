@@ -25,6 +25,14 @@ public class Ball implements Physic, Drawable {
 	public static final int DEFAULT_INIT_SURFACE_ELASTICITY = 10;
 	public static final int DEFAULT_INIT_AIR_PRESSURE = 30;
 
+	public static final int MIN_SURFACE_ATOM_WEIGHT = 1;
+	public static final int MIN_AIR_WEIGHT = 1;
+	public static final int MIN_SURFACE_ELASTICITY = 1;
+	public static final int MIN_AIR_PRESSURE = 1;
+	public static final int MAX_SURFACE_ATOM_WEIGHT = 50;
+	public static final int MAX_AIR_WEIGHT = 200;
+	public static final int MAX_SURFACE_ELASTICITY = 100;
+	public static final int MAX_AIR_PRESSURE = 200;
 
 	private Atom centerAtom;
 	private Atom[] surface;
@@ -80,17 +88,8 @@ public class Ball implements Physic, Drawable {
 		binders[2 * atomsAmount - 1] = bind;
 	}
 
-	/**
-	 * Create ball on specific position, with specific atom amounts and radius.
-	 * Other values will be default
-	 *
-	 * @param x position of center
-	 * @param y position of center
-	 * @param atomsAmount amounts of atoms on surface
-	 * @param radius of ball
-	 */
-	public Ball(double x, double y, int atomsAmount, double radius) {
-		this(x, y, atomsAmount, radius, 1D, atomsAmount, 10D, 30D);
+	public Ball(double pressure, double airWeight, double atomWeight, double elasticity) {
+		this(Main.WIDTH / 2, Main.HEIGHT / 2 - 100, DEFAULT_INIT_ATOMS_AMOUNT, DEFAULT_INIT_RADIUS, atomWeight, airWeight, elasticity, pressure);
 	}
 
 	/**
@@ -177,5 +176,9 @@ public class Ball implements Physic, Drawable {
 		for(Atom t : surface) {
 			t.paint(g);
 		}
+	}
+
+	public Atom getCenterAtom() {
+		return centerAtom;
 	}
 }
