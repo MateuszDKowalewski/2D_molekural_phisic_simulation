@@ -21,8 +21,8 @@ public class GenerateBallPanel implements ActionListener{
     int radius;
     int surfaceAtomWeight;
     int centerAtomWeight;
-    int surfaceElasticy;
-    int preasure;
+    int surfaceElasticity;
+    int pressure;
     int height;
 
     GenerateBallPanel(JPanel panel, Frame frame, GameContainer gc) {
@@ -34,8 +34,8 @@ public class GenerateBallPanel implements ActionListener{
         this.radius = 100;
         this.surfaceAtomWeight = 1;
         this.centerAtomWeight = 20;
-        this.surfaceElasticy = 10;
-        this.preasure = 30;
+        this.surfaceElasticity = 10;
+        this.pressure = 30;
         this.height = 0;
 
         JLabel label1 = new JLabel("<html>Atoms<br>Amount:</html>");
@@ -89,9 +89,9 @@ public class GenerateBallPanel implements ActionListener{
         JLabel label5 = new JLabel("<html>Surface<br>elasticity:</html>");
         label5.setBounds(Main.WIDTH + 10, 200, 80, 50);
         panel.add(label5);
-        JSlider surfaceElasticySlider = new JSlider(JSlider.HORIZONTAL, 0, 50, this.surfaceElasticy);
+        JSlider surfaceElasticySlider = new JSlider(JSlider.HORIZONTAL, 0, 50, this.surfaceElasticity);
         surfaceElasticySlider.setBounds(Main.WIDTH + 80, 200, WIDTH - 80, 50);
-        surfaceElasticySlider.addChangeListener(e -> surfaceElasticy = surfaceElasticySlider.getValue());
+        surfaceElasticySlider.addChangeListener(e -> surfaceElasticity = surfaceElasticySlider.getValue());
         surfaceElasticySlider.setMajorTickSpacing(10);
         surfaceElasticySlider.setMinorTickSpacing(5);
         surfaceElasticySlider.setPaintTicks(true);
@@ -101,9 +101,9 @@ public class GenerateBallPanel implements ActionListener{
         JLabel label6 = new JLabel("<html>Pressure:</html>");
         label6.setBounds(Main.WIDTH + 10, 250, 80, 50);
         panel.add(label6);
-        JSlider preasureSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, this.preasure);
+        JSlider preasureSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, this.pressure);
         preasureSlider.setBounds(Main.WIDTH + 80, 250, WIDTH - 80, 50);
-        preasureSlider.addChangeListener(e -> preasure = preasureSlider.getValue());
+        preasureSlider.addChangeListener(e -> pressure = preasureSlider.getValue());
         preasureSlider.setMajorTickSpacing(20);
         preasureSlider.setMinorTickSpacing(5);
         preasureSlider.setPaintTicks(true);
@@ -132,7 +132,7 @@ public class GenerateBallPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if("generate".equals(e.getActionCommand())){
-            ball = new Ball(Main.WIDTH / 2, 400 - radius - height, atomAmounts, radius, surfaceAtomWeight, centerAtomWeight, surfaceElasticy, preasure);
+            ball = new Ball(Main.WIDTH / 2, 400 - radius - height, atomAmounts, radius, surfaceAtomWeight, centerAtomWeight, surfaceElasticity, pressure);
             gc.addPhysicComponent(ball);
             frame.clear();
             frame.addDrawableElement(ball);
