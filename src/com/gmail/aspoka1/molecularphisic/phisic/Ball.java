@@ -92,6 +92,10 @@ public class Ball implements Physic, Drawable {
 		this(Main.WIDTH / 2, Main.HEIGHT / 2 - 100, DEFAULT_INIT_ATOMS_AMOUNT, DEFAULT_INIT_RADIUS, atomWeight, airWeight, elasticity, pressure);
 	}
 
+	public Ball(double pressure, double airWeight, double atomWeight, double elasticity, int ypos) {
+		this(Main.WIDTH / 2, ypos, DEFAULT_INIT_ATOMS_AMOUNT, DEFAULT_INIT_RADIUS, atomWeight, airWeight, elasticity, pressure);
+	}
+
 	/**
 	 * Create ball, with default parameters, on screen center
 	 */
