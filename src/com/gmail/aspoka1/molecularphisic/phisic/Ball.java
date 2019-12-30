@@ -26,12 +26,12 @@ public class Ball implements Physic, Drawable {
 	public static final int DEFAULT_INIT_AIR_PRESSURE = 190;
 
 	public static final int MIN_SURFACE_ATOM_WEIGHT = 1;
-	public static final int MIN_AIR_WEIGHT = 1;
-	public static final int MIN_SURFACE_ELASTICITY = 1;
-	public static final int MIN_AIR_PRESSURE = 1;
+	public static final int MIN_AIR_WEIGHT = 50;
+	public static final int MIN_SURFACE_ELASTICITY = 50;
+	public static final int MIN_AIR_PRESSURE = 50;
 	public static final int MAX_SURFACE_ATOM_WEIGHT = 50;
 	public static final int MAX_AIR_WEIGHT = 200;
-	public static final int MAX_SURFACE_ELASTICITY = 100;
+	public static final int MAX_SURFACE_ELASTICITY = 400;
 	public static final int MAX_AIR_PRESSURE = 200;
 
 	private Atom centerAtom;

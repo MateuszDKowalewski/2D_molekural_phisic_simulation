@@ -65,10 +65,11 @@ public class Binder implements Drawable{
 		
 		double length = a1.distance(a2);
 		double lengthDelta = length - defaultLength;
+		//double forceLength = k * ((Math.exp(lengthDelta) + Math.exp(-lengthDelta)) / 2 - 1) * Math.signum(lengthDelta);
 		double forceLength = k * lengthDelta;
 		
-		xForce = (a2.x - a1.x) / defaultLength * forceLength;
-		yForce = (a2.y - a1.y) / defaultLength * forceLength;
+		xForce = (a2.x - a1.x) * (forceLength / defaultLength);
+		yForce = (a2.y - a1.y) * (forceLength / defaultLength);
 		
 		if(a == a1) {
 			force = new Point2D.Double(xForce, yForce);

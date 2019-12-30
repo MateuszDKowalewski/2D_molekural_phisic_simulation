@@ -22,6 +22,7 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
     private static final long serialVersionUID = -367935700757882281L;
 
     public static final int DEFAULT_INITIAL_WEIGHT = 1;
+    public static final double RESISTANCE_FORCE_SCALE = 0.1D;
 
     private static final int RADIUS = 2;
     private Point2D.Double lastPosition;
@@ -121,6 +122,9 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
                 this.addForce(t.calculateForce(this));
             }
             averageForce.y += Physic.GRAVITATION_FORCE * weight;
+
+            averageForce.x -= velocity.x * RESISTANCE_FORCE_SCALE;
+            averageForce.y -= velocity.y * RESISTANCE_FORCE_SCALE;
         }
     }
 

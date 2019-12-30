@@ -21,20 +21,21 @@ public class ExperimentEngine {
 
                 bw.write("Atom amount:" + Ball.DEFAULT_INIT_ATOMS_AMOUNT + " Radius:" + Ball.DEFAULT_INIT_RADIUS + "\n");
 
+                int atomWeight = 1;
+
                 long start = System.currentTimeMillis();
                 for(int pressure = Ball.MIN_AIR_PRESSURE; pressure <= Ball.MAX_AIR_PRESSURE; pressure += 5) {
                     for(int airWeight = Ball.MIN_AIR_WEIGHT; airWeight <= Ball.MAX_AIR_WEIGHT; airWeight += 5) {
-                        for(int atomWeight = Ball.MIN_SURFACE_ATOM_WEIGHT; atomWeight <= Ball.MAX_SURFACE_ATOM_WEIGHT; atomWeight += 5) {
-                            for(int elasticity = Ball.MIN_SURFACE_ELASTICITY; elasticity <= Ball.MAX_SURFACE_ELASTICITY; elasticity += 5) {
-                                Ball ball = new Ball(pressure, airWeight, atomWeight, elasticity);
-                                Experiment e = new SimpleBallExperimentEngine(ball, 30);
-                                e.run(1D / 60D);
-                                bw.write(experimentNumber + " result:" + e.returnResult() + " pressure:" + pressure + " airWeight:" + airWeight + " atomWeight:" + atomWeight + " elasticity:" + elasticity + "\n");
-                                System.out.println(experimentNumber);
-                                experimentNumber++;
-                            }
+                        for(int elasticity = Ball.MIN_SURFACE_ELASTICITY; elasticity <= Ball.MAX_SURFACE_ELASTICITY; elasticity += 5) {
+                            Ball ball = new Ball(pressure, airWeight, atomWeight, elasticity);
+                            Experiment e = new SimpleBallExperimentEngine(ball, 30);
+                            e.run(1D / 60D);
+                            bw.write(experimentNumber + " result:" + e.returnResult() + " pressure:" + pressure + " airWeight:" + airWeight + " atomWeight:" + atomWeight + " elasticity:" + elasticity + "\n");
+                            System.out.println(experimentNumber);
+                            experimentNumber++;
                         }
                     }
+                    System.out.println((double)pressure / (Ball.MAX_AIR_PRESSURE - Ball.MIN_AIR_PRESSURE));
                 }
                 long finish = System.currentTimeMillis();
                 long timeElapsed = (finish - start) / 1000;
