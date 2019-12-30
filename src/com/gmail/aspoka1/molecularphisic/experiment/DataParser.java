@@ -10,12 +10,12 @@ import java.util.Scanner;
 
 public class DataParser {
     public static void main(String[] args) throws FileNotFoundException {
-        String fileName = "E2Result.txt";
-        String targetName = "E2Best.txt";
+        String fileName = "E6Result.txt";
+        String targetName = "best1000\\E6Best.txt";
         String line;
         String header;
 
-        DataLine[] data = new DataLine[100];
+        DataLine[] data = new DataLine[1000];
 
         File in = new File("Results\\" + fileName);
         Scanner stream = new Scanner(in);
