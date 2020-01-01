@@ -133,9 +133,8 @@ public class GenerateBallPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if("generate".equals(e.getActionCommand())){
             ball = new Ball(Main.WIDTH / 2, 400 - radius - height, atomAmounts, radius, surfaceAtomWeight, centerAtomWeight, surfaceElasticity, pressure);
-            gc.addPhysicComponent(ball);
-            frame.clear();
-            frame.addDrawableElement(ball);
+            gc.setBall(ball);
+            frame.setBall(ball);
             panel.repaint();
         }
     }

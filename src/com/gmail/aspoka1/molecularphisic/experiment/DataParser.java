@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class DataParser {
     public static void main(String[] args) throws FileNotFoundException {
-        String fileName = "E6Result.txt";
-        String targetName = "best1000\\E6Best.txt";
+        String fileName = "E8Result.txt";
+        String targetName = "best1000\\E8Best.txt";
         String line;
         String header;
 

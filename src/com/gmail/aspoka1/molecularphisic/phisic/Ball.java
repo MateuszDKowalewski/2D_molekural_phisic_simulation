@@ -21,9 +21,9 @@ public class Ball implements Physic, Drawable {
 	public static final int DEFAULT_INIT_ATOMS_AMOUNT = 20;
 	public static final int DEFAULT_INIT_RADIUS = 100;
 	public static final int DEFAULT_INIT_SURFACE_ATOM_WEIGHT = 1;
-	public static final int DEFAULT_INIT_AIR_WEIGHT = 169;
-	public static final int DEFAULT_INIT_SURFACE_ELASTICITY = 100;
-	public static final int DEFAULT_INIT_AIR_PRESSURE = 190;
+	public static final int DEFAULT_INIT_AIR_WEIGHT = 200;
+	public static final int DEFAULT_INIT_SURFACE_ELASTICITY = 251;
+	public static final int DEFAULT_INIT_AIR_PRESSURE = 200;
 
 	public static final int MIN_SURFACE_ATOM_WEIGHT = 1;
 	public static final int MIN_AIR_WEIGHT = 50;

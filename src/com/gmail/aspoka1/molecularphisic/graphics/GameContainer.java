@@ -3,6 +3,7 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.gmail.aspoka1.molecularphisic.phisic.Ball;
 import com.gmail.aspoka1.molecularphisic.phisic.Physic;
 import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisional;
 
@@ -13,7 +14,7 @@ public class GameContainer implements Runnable {
 	private boolean running = false;
 	private final double UPDATE_CUP = 1.0 / 60.0;
 
-	List<Physic> toSimulate = new LinkedList<>();
+	Ball toSimulate = null;
 	List<StaticCollisional> staticCollisionalsBlock = new LinkedList<>();
 
 	public GameContainer() {
@@ -48,6 +49,14 @@ public class GameContainer implements Runnable {
 			while(unprocessedTime >= UPDATE_CUP) {
 				unprocessedTime -= UPDATE_CUP;
 				render = true;
+				if(toSimulate != null) {
+					toSimulate.calculateForce(UPDATE_CUP);
+					toSimulate.calculateAcceleration(UPDATE_CUP);
+					toSimulate.calculateVelocity(UPDATE_CUP);
+					toSimulate.calculatePosition(UPDATE_CUP);
+					toSimulate.calculateCollision();
+				}
+				/*
 				for(Physic t : toSimulate) {
 					t.calculateForce(UPDATE_CUP);
 				}
@@ -63,6 +72,7 @@ public class GameContainer implements Runnable {
 				for(Physic d : toSimulate) {
 					d.calculateCollision();
 				}
+				*/
 				if(frameTime >= 1.0) {
 					frameTime = 0;
 					fps = frames;
@@ -102,9 +112,15 @@ public class GameContainer implements Runnable {
 		this.c = c;
 	}
 
+	public void setBall(Ball ball) {
+		toSimulate = ball;
+	}
+
+	/*
 	public void addPhysicComponent(Physic component) {
 		toSimulate.add(component);
 	}
+	*/
 
 	public void addStaticCollisionalComponent(StaticCollisional component) {
 		staticCollisionalsBlock.add(component);

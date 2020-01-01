@@ -2,6 +2,7 @@ package com.gmail.aspoka1.molecularphisic.phisic;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
@@ -48,5 +49,15 @@ public class CollisionBlock extends Rectangle2D.Double implements StaticCollisio
     public void paint(Graphics g) {
         g.setColor(color);
         g.fillRect((int) x, (int) y, (int) width, (int) height);
+    }
+
+    @Override
+    public boolean isColliding(Atom atom) {
+        return false;
+    }
+
+    @Override
+    public Point2D.Double calculateCollision(Atom a) {
+        return null;
     }
 }

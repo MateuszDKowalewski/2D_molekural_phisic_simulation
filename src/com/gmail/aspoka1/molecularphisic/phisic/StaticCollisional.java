@@ -4,7 +4,8 @@ import java.awt.geom.Point2D;
 
 /**
  * Dummy interface for static blocks which can collide with Atom
- * TODO: put it to work
  */
 public interface StaticCollisional {
+    boolean isColliding(Atom atom);
+    Point2D.Double calculateCollision(Atom a);
 }

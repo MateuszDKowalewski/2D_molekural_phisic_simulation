@@ -13,7 +13,7 @@ public class ExperimentEngine {
 
         try {
             String content = "TutorialsPoint is one the best site in the world";
-            File file = new File("Results\\E2Result.txt");
+            File file = new File("Results\\E8Result.txt");
             if (!file.exists()) {
                 file.createNewFile();
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
@@ -24,18 +24,18 @@ public class ExperimentEngine {
                 int atomWeight = 1;
 
                 long start = System.currentTimeMillis();
-                for(int pressure = Ball.MIN_AIR_PRESSURE; pressure <= Ball.MAX_AIR_PRESSURE; pressure += 5) {
-                    for(int airWeight = Ball.MIN_AIR_WEIGHT; airWeight <= Ball.MAX_AIR_WEIGHT; airWeight += 5) {
-                        for(int elasticity = Ball.MIN_SURFACE_ELASTICITY; elasticity <= Ball.MAX_SURFACE_ELASTICITY; elasticity += 5) {
+                for(int pressure = Ball.MIN_AIR_PRESSURE; pressure <= Ball.MAX_AIR_PRESSURE; pressure += 1) {
+                    for(int airWeight = Ball.MIN_AIR_WEIGHT; airWeight <= Ball.MAX_AIR_WEIGHT; airWeight += 1) {
+                        for(int elasticity = Ball.MIN_SURFACE_ELASTICITY; elasticity <= Ball.MAX_SURFACE_ELASTICITY; elasticity += 1) {
                             Ball ball = new Ball(pressure, airWeight, atomWeight, elasticity);
                             Experiment e = new SimpleBallExperimentEngine(ball, 30);
                             e.run(1D / 60D);
                             bw.write(experimentNumber + " result:" + e.returnResult() + " pressure:" + pressure + " airWeight:" + airWeight + " atomWeight:" + atomWeight + " elasticity:" + elasticity + "\n");
-                            System.out.println(experimentNumber);
+                            //System.out.println(experimentNumber);
                             experimentNumber++;
                         }
                     }
-                    System.out.println((double)pressure / (Ball.MAX_AIR_PRESSURE - Ball.MIN_AIR_PRESSURE));
+                    System.out.println((double)pressure / (Ball.MAX_AIR_PRESSURE - Ball.MIN_AIR_PRESSURE) + "%");
                 }
                 long finish = System.currentTimeMillis();
                 long timeElapsed = (finish - start) / 1000;

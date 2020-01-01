@@ -1,6 +1,7 @@
 package com.gmail.aspoka1.molecularphisic.graphics;
 
 import com.gmail.aspoka1.molecularphisic.Main;
+import com.gmail.aspoka1.molecularphisic.phisic.Ball;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -33,14 +34,13 @@ public class Frame extends JFrame {
 	public void clear() {
 		c.clear();
 	}
-
-	// TODO: add collision with static block and remove it
-	public void setGround(Drawable ground) {
-		c.setGround(ground);
-	}
 	
 	public void addDrawableElement (Drawable e) {
 		c.addDrawableElement(e);
+	}
+
+	public void setBall(Ball ball) {
+		c.setBall(ball);
 	}
 	
 	// getters
@@ -50,7 +50,7 @@ public class Frame extends JFrame {
 class Panel extends JPanel {
 	private static final long serialVersionUID = -6832117658886512528L;
 
-	Drawable ground; // TODO: delete
+	Ball ball;
 	List<Drawable> elements = new LinkedList<>();
 
 	int width;
@@ -78,15 +78,14 @@ class Panel extends JPanel {
 		g.setColor(Color.BLACK);
 		g.drawLine(width, 0, width, height);
 
-		ground.paint(g);
+		//ground.paint(g);
 
+		if(ball != null) {
+			ball.paint(g);
+		}
 		for(Drawable e : elements) {
 			e.paint(g);
 		}
-	}
-
-	public void setGround(Drawable ground) {
-		this.ground = ground;
 	}
 
 	public void clear() {
@@ -95,6 +94,10 @@ class Panel extends JPanel {
 
 	public void addDrawableElement(Drawable e) {
 		elements.add(e);
+	}
+
+	public void setBall(Ball ball) {
+		this.ball = ball;
 	}
 }
 
