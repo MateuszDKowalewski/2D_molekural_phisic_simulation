@@ -35,6 +35,8 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
 
     private List<Binder> binders;
 
+    private List<StaticCollisional> collisional = new LinkedList<>();
+
     /**
      * Create atom with specified position and weight
      * Atom is without any binders, velocity, acceleration and force
@@ -84,6 +86,10 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
      */
     Atom(Point2D.Double p) {
         this(p.x, p.y, DEFAULT_INITIAL_WEIGHT);
+    }
+
+    public void addCollisional(StaticCollisional collisional) {
+        this.collisional.add(collisional);
     }
 
     /**
@@ -179,11 +185,25 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
      */
     @Override
     public void calculateCollision() {
+
+        for(StaticCollisional t : collisional) {
+            Point2D newPos = t.calculateCollision(this);
+            if(newPos != null) {
+                System.out.println(this + " " + newPos);
+                x = newPos.getX();
+                y = newPos.getY();
+                velocity.y = 0;
+                acceleration.y = 0;
+            }
+        }
+
+        /*
         if (this.y > 400) {
             this.y = 400;
             velocity.y = 0;
             acceleration.y = 0;
         }
+         */
     }
 
     // Graphic methods
@@ -194,10 +214,12 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
     }
 
     // Methods override from object
+    /*
     @Override
     public String toString() {
         return super.toString() + averageForce.toString() + acceleration.toString() + velocity.toString();
     }
+    */
 
     // getters
     public Point2D.Double getVelocity() {

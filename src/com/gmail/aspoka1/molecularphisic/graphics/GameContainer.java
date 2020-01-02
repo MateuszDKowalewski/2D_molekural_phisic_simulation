@@ -15,7 +15,7 @@ public class GameContainer implements Runnable {
 	private final double UPDATE_CUP = 1.0 / 60.0;
 
 	Ball toSimulate = null;
-	List<StaticCollisional> staticCollisionalsBlock = new LinkedList<>();
+	public List<StaticCollisional> staticCollisionalsBlock = new LinkedList<>();
 
 	public GameContainer() {
 		thread = new Thread(this);

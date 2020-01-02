@@ -53,16 +53,4 @@ public class Line {
     public String toString() {
         return "Line{" + "a=" + a + ", b=" + b + ", c=" + c + '}';
     }
-
-    public double getA() {
-        return a;
-    }
-
-    public double getB() {
-        return b;
-    }
-
-    public double getC() {
-        return c;
-    }
 }

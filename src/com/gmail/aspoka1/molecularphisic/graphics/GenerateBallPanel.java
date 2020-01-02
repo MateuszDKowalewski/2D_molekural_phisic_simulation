@@ -2,6 +2,7 @@ package com.gmail.aspoka1.molecularphisic.graphics;
 
 import com.gmail.aspoka1.molecularphisic.Main;
 import com.gmail.aspoka1.molecularphisic.phisic.Ball;
+import com.gmail.aspoka1.molecularphisic.phisic.StaticCollisional;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -133,6 +134,9 @@ public class GenerateBallPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if("generate".equals(e.getActionCommand())){
             ball = new Ball(Main.WIDTH / 2, 400 - radius - height, atomAmounts, radius, surfaceAtomWeight, centerAtomWeight, surfaceElasticity, pressure);
+            for(StaticCollisional t : gc.staticCollisionalsBlock) {
+                ball.addCollisional(t);
+            }
             gc.setBall(ball);
             frame.setBall(ball);
             panel.repaint();

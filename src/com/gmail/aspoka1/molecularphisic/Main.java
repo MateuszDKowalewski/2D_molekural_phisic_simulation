@@ -3,7 +3,6 @@ package com.gmail.aspoka1.molecularphisic;
 import com.gmail.aspoka1.molecularphisic.graphics.Drawable;
 import com.gmail.aspoka1.molecularphisic.graphics.Frame;
 import com.gmail.aspoka1.molecularphisic.graphics.GameContainer;
-import com.gmail.aspoka1.molecularphisic.phisic.CollisionBlock;
 import com.gmail.aspoka1.molecularphisic.phisic.Polygon;
 
 import java.awt.*;
@@ -32,8 +31,10 @@ public class Main{
 		Point2D.Double p4 = new Point2D.Double(640D, 480D);
 		Point2D.Double p5 = new Point2D.Double(0D, 480D);
 
-		Drawable d = new Polygon(Color.GREEN, p1, p2, p3, p4, p5);
+		Polygon d = new Polygon(Color.GREEN, p1, p2, p3, p4, p5);
 		frame.addDrawableElement(d);
+		gc.addStaticCollisionalComponent(d);
+
 
 		gc.run();
 	}

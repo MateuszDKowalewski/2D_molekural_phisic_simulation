@@ -103,6 +103,12 @@ public class Ball implements Physic, Drawable {
 		this(Main.WIDTH / 2, Main.HEIGHT / 2 - 100, DEFAULT_INIT_ATOMS_AMOUNT, DEFAULT_INIT_RADIUS, DEFAULT_INIT_SURFACE_ATOM_WEIGHT, DEFAULT_INIT_AIR_WEIGHT, DEFAULT_INIT_SURFACE_ELASTICITY, DEFAULT_INIT_AIR_PRESSURE);
 	}
 
+	public void addCollisional(StaticCollisional collisional) {
+		for(Atom a : surface) {
+			a.addCollisional(collisional);
+		}
+	}
+
 	/**
 	 * Calculate forces for all atoms in ball
 	 * This function had to be used in all atoms before {@code calculateAcceleration(double time)}
