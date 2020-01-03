@@ -16,7 +16,7 @@ public class Line {
     public Line(Point2D.Double p1, Point2D.Double p2) {
         a = p2.getY() - p1.getY();
         b = p1.getX() - p2.getX();
-        c = -(a * p1.getX() + b * p1.getY());
+        c = p2.x * p1.y - p2.y * p1.x;
     }
 
     public Line(Segment s) {
@@ -33,8 +33,10 @@ public class Line {
     }
 
     public Line perpendicular(Point2D.Double p) {
+        double a1 = 1 / a;
+        double b1 = - 1 / b;
         double c1 = a * p.getX() - b * p.getY();
-        return new Line(-a, b, c);
+        return new Line(a1, b1, c1);
     }
 
     public Point2D.Double intersection(Line l) {

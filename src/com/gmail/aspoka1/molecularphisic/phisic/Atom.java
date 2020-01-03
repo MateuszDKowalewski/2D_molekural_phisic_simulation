@@ -245,4 +245,11 @@ public class Atom extends Point2D.Double implements Drawable, Physic {
     public void setPhysicSimulation(boolean simulatePhysic) {
         this.simulatePhysic = simulatePhysic;
     }
+
+    public boolean isFroggyOnTheLoggy() {
+        if(x == 50){
+            return true;
+        }
+        return false;
+    }
 }
